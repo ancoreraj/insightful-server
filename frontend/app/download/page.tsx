@@ -170,38 +170,6 @@ export default function DownloadPage() {
                 Download
               </button>
             </div>
-
-            <div
-              className={`bg-white rounded-lg shadow-lg p-6 border-2 ${
-                platform === "linux"
-                  ? "border-blue-600"
-                  : "border-gray-100"
-              }`}
-            >
-              <div className="flex items-center justify-center w-16 h-16 bg-gray-100 rounded-lg mb-4 mx-auto">
-                <MonitorPlay className="h-8 w-8 text-gray-700" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 text-center mb-2">
-                Linux
-              </h3>
-              <p className="text-sm text-gray-600 text-center mb-4">
-                Ubuntu 20.04 or later
-              </p>
-              {platform === "linux" && (
-                <div className="flex items-center justify-center mb-3">
-                  <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded">
-                    Recommended for you
-                  </span>
-                </div>
-              )}
-              <button
-                onClick={() => handleDownload("linux")}
-                className="w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center"
-              >
-                <Download className="h-4 w-4 mr-2" />
-                Download
-              </button>
-            </div>
           </div>
 
           <div className="bg-blue-50 rounded-lg p-6 border border-blue-100">
