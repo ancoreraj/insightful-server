@@ -11,10 +11,28 @@ export default function Home() {
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    checkAuth();
+    let hasCompleted = false;
+    
+    const forceStop = setTimeout(() => {
+      if (!hasCompleted) {
+        console.log('⏰ Force stopping loading screen');
+        setLoading(false);
+      }
+    }, 3000);
+    
+    checkAuth().finally(() => {
+      hasCompleted = true;
+      clearTimeout(forceStop);
+    });
+    
     api.setUnauthorizedCallback(() => {
       handleLogout(true);
     });
+    
+    return () => {
+      hasCompleted = true;
+      clearTimeout(forceStop);
+    };
   }, []);
 
   const checkAuth = async () => {
@@ -24,8 +42,21 @@ export default function Home() {
       
       if (typeof window !== 'undefined' && window.electron) {
         console.log('📱 Getting stored token...');
-        const token = await window.electron.getAuthToken();
-        const storedUser = await window.electron.getStoredUser();
+        
+        const tokenPromise = Promise.race([
+          window.electron.getAuthToken(),
+          new Promise<string>((_, reject) => setTimeout(() => reject(new Error('Token retrieval timeout')), 3000))
+        ]);
+        
+        const userPromise = Promise.race([
+          window.electron.getStoredUser(),
+          new Promise<any>((_, reject) => setTimeout(() => reject(new Error('User retrieval timeout')), 3000))
+        ]);
+        
+        const [token, storedUser] = await Promise.all([
+          tokenPromise.catch(() => null),
+          userPromise.catch(() => null)
+        ]);
         
         console.log('Token exists:', !!token);
         console.log('User exists:', !!storedUser);
@@ -44,7 +75,11 @@ export default function Home() {
     } catch (error) {
       console.error('❌ Auth check failed:', error);
       if (typeof window !== 'undefined' && window.electron) {
-        await window.electron.clearAuthToken();
+        try {
+          await window.electron.clearAuthToken();
+        } catch (e) {
+          console.error('Failed to clear auth token:', e);
+        }
       }
     } finally {
       console.log('✅ Setting loading to false');

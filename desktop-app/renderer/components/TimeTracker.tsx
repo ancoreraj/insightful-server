@@ -21,11 +21,30 @@ export default function TimeTracker({ user, onLogout }: TimeTrackerProps) {
   const [elapsedTime, setElapsedTime] = useState(0);
   const [activeShift, setActiveShift] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [activeProjectName, setActiveProjectName] = useState<string>('');
+  const [activeTaskName, setActiveTaskName] = useState<string>('');
 
   useEffect(() => {
-    loadData();
-    checkActiveShift();
+    const initializeTracker = async () => {
+      await loadData();
+      await checkActiveShift();
+    };
+    initializeTracker();
   }, []);
+
+  useEffect(() => {
+    if (activeShift && activeShift.projectId && projects.length > 0) {
+      const projectName = getProjectName(activeShift.projectId);
+      setActiveProjectName(projectName);
+    }
+  }, [projects, activeShift]);
+
+  useEffect(() => {
+    if (activeShift && activeShift.taskId && tasks.length > 0) {
+      const taskName = getTaskName(activeShift.taskId);
+      setActiveTaskName(taskName);
+    }
+  }, [tasks, activeShift]);
 
   useEffect(() => {
     if (selectedProject) {
@@ -87,6 +106,10 @@ export default function TimeTracker({ user, onLogout }: TimeTrackerProps) {
           setElapsedTime(shift.elapsed || 0);
           setSelectedProject(shift.projectId || '');
           setSelectedTask(shift.taskId || '');
+          
+          if (shift.projectId) {
+            await loadProjectTasks(shift.projectId);
+          }
         }
       }
     } catch (error) {
@@ -121,6 +144,14 @@ export default function TimeTracker({ user, onLogout }: TimeTrackerProps) {
       setActiveShift(createdShift);
       setIsTracking(true);
       setElapsedTime(0);
+      
+      const projectName = getProjectName(selectedProject);
+      setActiveProjectName(projectName);
+      
+      if (selectedTask) {
+        const taskName = getTaskName(selectedTask);
+        setActiveTaskName(taskName);
+      }
     } catch (error: any) {
       console.error('Error starting shift:', error);
       alert('Failed to start tracking: ' + (error.response?.data?.error?.message || error.message));
@@ -146,6 +177,8 @@ export default function TimeTracker({ user, onLogout }: TimeTrackerProps) {
       setElapsedTime(0);
       setSelectedProject('');
       setSelectedTask('');
+      setActiveProjectName('');
+      setActiveTaskName('');
     } catch (error: any) {
       console.error('Error stopping shift:', error);
       alert('Failed to stop tracking: ' + (error.response?.data?.error?.message || error.message));
@@ -280,14 +313,14 @@ export default function TimeTracker({ user, onLogout }: TimeTrackerProps) {
                     <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
                       <FolderOpen className="w-4 h-4 text-blue-600" />
                     </div>
-                    <span className="font-semibold text-gray-800">{getProjectName(activeShift.projectId)}</span>
+                    <span className="font-semibold text-gray-800">{activeProjectName || 'Loading...'}</span>
                   </div>
                   {activeShift.taskId && (
                     <div className="flex items-center justify-center space-x-2">
                       <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
                         <ListTodo className="w-4 h-4 text-indigo-600" />
                       </div>
-                      <span className="text-gray-700">{getTaskName(activeShift.taskId)}</span>
+                      <span className="text-gray-700">{activeTaskName || 'Loading...'}</span>
                     </div>
                   )}
                 </div>

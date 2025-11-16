@@ -168,20 +168,50 @@ ipcMain.handle('get-app-info', async () => {
 
 ipcMain.handle('capture-screen', async () => {
   try {
+    let activeWindow = null;
+    try {
+      activeWindow = await activeWin();
+    } catch (winError) {
+      console.warn('Could not get active window (accessibility permission may be needed):', winError.message);
+    }
+    
     const sources = await desktopCapturer.getSources({
-      types: ['screen'],
+      types: ['window', 'screen'],
       thumbnailSize: { width: 1920, height: 1080 }
     });
 
     if (sources.length === 0) {
+      console.error('No screen sources available');
       return null;
     }
 
-    const source = sources[0];
-    const dataUrl = source.thumbnail.toDataURL();
+    let targetSource = sources.find(source => source.name === 'Entire Screen' || source.name.includes('Screen'));
+    
+    if (activeWindow && activeWindow.owner) {
+      const windowSource = sources.find(source => 
+        source.name.toLowerCase().includes(activeWindow.owner.name.toLowerCase()) ||
+        source.name === activeWindow.title
+      );
+      
+      if (windowSource) {
+        targetSource = windowSource;
+      }
+    }
+    
+    if (!targetSource && sources.length > 0) {
+      targetSource = sources[0];
+    }
+    
+    if (!targetSource) {
+      console.error('No suitable screen source found');
+      return null;
+    }
+    
+    const dataUrl = targetSource.thumbnail.toDataURL();
     
     return dataUrl;
   } catch (error) {
+    console.error('Screenshot capture error:', error);
     return null;
   }
 });
@@ -199,6 +229,7 @@ ipcMain.handle('get-active-window', async () => {
     }
     return null;
   } catch (error) {
+    console.warn('Could not get active window (accessibility permission may be needed):', error.message);
     return null;
   }
 });
