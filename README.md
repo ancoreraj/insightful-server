@@ -24,12 +24,9 @@ A comprehensive time tracking and employee monitoring system with automatic scre
 
 Watch a complete walkthrough of the Insightful Time Tracker application:
 
-<div align="center">
-  <video width="100%" style="max-width: 800px;" controls>
-    <source src="./demo_video.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</div>
+[![Insightful Time Tracker Demo](https://img.youtube.com/vi/AgHi1efWiiA/maxresdefault.jpg)](https://www.youtube.com/watch?v=AgHi1efWiiA)
+
+**[▶️ Watch Full Demo on YouTube](https://www.youtube.com/watch?v=AgHi1efWiiA)**
 
 ---
 
