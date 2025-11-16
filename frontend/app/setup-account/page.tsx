@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Clock, CheckCircle2, Loader2 } from "lucide-react";
 import api from "@/lib/api";
 
-export default function SetupAccount() {
+function SetupAccountContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
@@ -186,5 +186,13 @@ export default function SetupAccount() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SetupAccount() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="text-gray-500">Loading...</div></div>}>
+      <SetupAccountContent />
+    </Suspense>
   );
 }
