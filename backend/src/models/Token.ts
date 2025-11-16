@@ -53,7 +53,6 @@ const tokenSchema = new Schema<IToken>(
 );
 
 tokenSchema.index({ userId: 1 });
-tokenSchema.index({ token: 1 }, { unique: true });
 tokenSchema.index({ type: 1 });
 tokenSchema.index({ userId: 1, type: 1 });
 tokenSchema.index({ expiresAt: 1 });

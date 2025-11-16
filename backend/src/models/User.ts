@@ -90,7 +90,6 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-userSchema.index({ email: 1 }, { unique: true });
 userSchema.index({ organizationId: 1 });
 userSchema.index({ teamId: 1 });
 userSchema.index({ organizationId: 1, email: 1 });
