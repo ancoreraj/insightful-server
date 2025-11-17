@@ -19,6 +19,14 @@ A comprehensive time tracking and employee monitoring system with automatic scre
 
 ---
 
+## Demo Credentials
+
+**Admin Access:**
+- Email: `admin@company.com`
+- Password: `SecurePassword123!`
+
+---
+
 ## Demo Video
 
 Watch a complete walkthrough of the Insightful Time Tracker application:
@@ -48,14 +56,6 @@ A modern, full-stack application designed to help organizations track employee t
 - **Task Tracking** - Create and assign tasks with status management
 - **Secure** - JWT authentication, encrypted passwords, role-based access
 - **Cross-Platform** - Works on macOS, Windows, and web browsers
-
----
-
-## Demo Credentials
-
-**Admin Access:**
-- Email: `admin@company.com`
-- Password: `SecurePassword123!`
 
 ---
 
