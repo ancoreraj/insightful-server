@@ -1,11 +1,18 @@
 # Insightful Time Tracker - Postman Collection Guide
 
-## 🚀 Base URL
+## Base URL
 ```
 https://insightful-server-production.up.railway.app/api
 ```
 
-## 🔑 Authentication
+## Download Full Postman Collection
+
+A complete Postman collection JSON file is available in the repository root:
+- `Insightful_API_Collection.postman_collection.json`
+
+Import this file directly into Postman for all configured endpoints with examples!
+
+## Authentication
 All protected endpoints require JWT token in header:
 ```
 Authorization: Bearer <your-access-token>
@@ -13,7 +20,7 @@ Authorization: Bearer <your-access-token>
 
 ---
 
-## 📋 Complete API Endpoints
+## Complete API Endpoints
 
 ### 1. Authentication (`/auth`)
 
@@ -106,7 +113,7 @@ Authorization: Bearer <your-access-token>
 
 ---
 
-## 📝 Sample Requests
+## Sample Requests
 
 ### Login
 ```bash
@@ -173,7 +180,7 @@ Authorization: Bearer {{accessToken}}
 
 ---
 
-## 🎯 Quick Import to Postman
+## Quick Import to Postman
 
 1. Open Postman
 2. Click "Import" button
@@ -185,7 +192,7 @@ Authorization: Bearer {{accessToken}}
 
 ---
 
-## 🔄 Authentication Flow
+## Authentication Flow
 
 1. **Login** → Get `accessToken` and `refreshToken`
 2. **Save tokens** → Store in Postman variables
@@ -194,7 +201,7 @@ Authorization: Bearer {{accessToken}}
 
 ---
 
-## 📊 Query Parameters
+## Query Parameters
 
 ### Common Filters:
 - `employeeId` - Filter by employee
@@ -209,7 +216,7 @@ Authorization: Bearer {{accessToken}}
 
 ---
 
-## ✅ Test Data
+## Test Data
 
 **Admin Credentials:**
 ```json
@@ -221,7 +228,7 @@ Authorization: Bearer {{accessToken}}
 
 ---
 
-## 🛠️ Endpoint Summary
+## Endpoint Summary
 
 | Category | Endpoints |
 |----------|-----------|
@@ -236,10 +243,3 @@ Authorization: Bearer {{accessToken}}
 | **Total** | **49 endpoints** |
 
 ---
-
-## 📦 Download Full Postman Collection
-
-A complete Postman collection JSON file is available in the repository root:
-- `Insightful_API_Collection.postman_collection.json`
-
-Import this file directly into Postman for all configured endpoints with examples!
