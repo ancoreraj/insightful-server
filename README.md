@@ -8,6 +8,7 @@ A comprehensive time tracking and employee monitoring system with automatic scre
 
 - **[FEATURES.md](./FEATURES.md)** - Complete feature list
 - **[DOCUMENTATION.md](./DOCUMENTATION.md)** - Setup guide and technical details
+- **[POSTMAN_COLLECTION.md](./POSTMAN_COLLECTION.md)** - Complete API documentation
 
 ---
 
