@@ -8,15 +8,14 @@ A comprehensive time tracking and employee monitoring system with automatic scre
 
 - **[FEATURES.md](./FEATURES.md)** - Complete feature list
 - **[DOCUMENTATION.md](./DOCUMENTATION.md)** - Setup guide and technical details
-- **[API_CONTRACTS.md](./API_CONTRACTS.md)** - Complete API documentation with examples
 
 ---
 
 ## Live Deployment
 
-- **Web Dashboard**: `https://your-frontend-app.vercel.app`
+- **Web Dashboard**: `https://insightful-server.vercel.app/`
 - **Backend API**: `https://insightful-server-production.up.railway.app/api`
-- **Desktop Apps**: DMG (macOS) and EXE (Windows) installers available
+- **Desktop Apps**: DMG (macOS) and EXE (Windows) installers available from download page
 
 ---
 
@@ -119,7 +118,6 @@ insightful-api-clone/
 │
 ├── FEATURES.md           # Complete feature list
 ├── DOCUMENTATION.md      # Setup & technical docs
-└── API_CONTRACTS.md      # API documentation
 ```
 
 ---
@@ -282,6 +280,5 @@ NEXT_PUBLIC_API_URL=your-backend-api-url
 For questions or issues, please refer to the documentation files:
 - **FEATURES.md** - Complete feature list
 - **DOCUMENTATION.md** - Technical documentation and setup guide
-- **API_CONTRACTS.md** - Detailed API documentation
 
 ---

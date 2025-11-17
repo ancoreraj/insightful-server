@@ -11,9 +11,19 @@ export default function TimeTrackingPage() {
   const [employees, setEmployees] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshingLive, setRefreshingLive] = useState(false);
-  const [dateRange, setDateRange] = useState({
-    start: new Date(new Date().setHours(0, 0, 0, 0)),
-    end: new Date(new Date().setHours(23, 59, 59, 999)),
+  const [dateRange, setDateRange] = useState(() => {
+    const today = new Date();
+    const sevenDaysAgo = new Date(today);
+    sevenDaysAgo.setDate(today.getDate() - 7);
+    sevenDaysAgo.setHours(0, 0, 0, 0);
+    
+    const endOfToday = new Date(today);
+    endOfToday.setHours(23, 59, 59, 999);
+    
+    return {
+      start: sevenDaysAgo,
+      end: endOfToday,
+    };
   });
   const [selectedEmployee, setSelectedEmployee] = useState<string>("");
 

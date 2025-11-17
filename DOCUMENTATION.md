@@ -2,7 +2,7 @@
 
 ##  Deployment URLs
 
-- **Frontend (Web Dashboard)**: `https://your-frontend-app.vercel.app`
+- **Frontend (Web Dashboard)**: `https://insightful-server.vercel.app`
 - **Backend API**: `https://insightful-server-production.up.railway.app/api`
 - **Desktop App**: DMG (macOS) and EXE (Windows) installers available
 

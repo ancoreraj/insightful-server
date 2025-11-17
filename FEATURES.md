@@ -187,6 +187,5 @@ https://insightful-server-production.up.railway.app/api
 
 ## Support & Documentation
 
-- Full API documentation in `API_CONTRACTS.md`
 - Setup guide in `DOCUMENTATION.md`
 - README for each component (backend, frontend, desktop-app)
